@@ -1,0 +1,43 @@
+table, th, td {
+  border: 1px solid black;
+  border-radius: 10px;
+}
+#first{
+    color:blueviolet;    
+    background-color: yellowgreen;
+    padding: 30px 50px 10px 100px;
+    border: 20px, dashed brown;
+    margin: 60px 50px 10px 20px;
+    align-items: center;
+}
+.second{
+    color: aquamarine;    
+    background-color: khaki;
+    padding: 100px 50px 0px 50px;
+    border: 20px dotted indigo;
+    margin: 60px 50px 10px 20px;
+}
+div{
+    width: 50px;
+    height: 40px;
+}
+*{
+    margin: 0px;
+}
+#parent{
+    width: 100%;
+    height: 200px;
+    display: flex;
+    background-color:chocolate;
+    justify-content:space-evenly;
+    align-items: end;
+}
+#box{
+    background-color: aqua;
+}
+#box2{
+    background-color: red;
+}
+#box3{
+    background-color: burlywood;
+}

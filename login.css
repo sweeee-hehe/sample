@@ -1,0 +1,21 @@
+*{
+    margin: 0px;
+}
+#parent{
+    width: 50%;
+    height: 180px;
+    display: flex;
+    background-color: white;
+    justify-content: center;
+    align-items: center;
+}
+#second{
+    width: 10 px;
+    display: flex;
+    justify-content: end;
+}
+#third{
+    width: 50px;
+    display: flex;
+    align-items: left;
+}
