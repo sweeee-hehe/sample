@@ -1,8 +1,8 @@
 import { useState } from "react";
-import "./login.css";
-import authService from "../services/authService";
+import "./signup.css";
+import authService from "../services/authService.js";
 
-function Login() {
+function Signup() {
   const [name, setName]=useState('');
 
   const handleName=(event)=>{
@@ -16,11 +16,17 @@ function Login() {
   const handlePass=(event)=>{
     setPass(event.target.value);
   }
+
+  const [mail, setMail]=useState('');
+
+  const handleMail=(event)=>{
+    setMail(event.target.value);
+  }
   
   // console.log(pass);
   const handleSubmit=(event)=>{
     event.preventDefault()
-    authService.login(name,pass)
+    authService.signup(mail,name,pass)
   }
   return (
     <div className="container">
@@ -28,6 +34,10 @@ function Login() {
 
         <h1>User Login</h1>
         <form onSubmit={handleSubmit}>
+         <input
+          type="email"
+          placeholder="Email" onChange={handleMail}
+        />
         <input
           type="text"
           placeholder="User name" onChange={handleName}
@@ -44,14 +54,14 @@ function Login() {
             Remember me
           </label>
 
-          <a href=" https://media.tenor.com/cRTQk6N_FxMAAAAe/swag-cat-swagbilli-cutecat-cats-cat-swag-ok-yooo-yo.png">Forgot password?</a>
+          {/* <a href=" https://media.tenor.com/cRTQk6N_FxMAAAAe/swag-cat-swagbilli-cutecat-cats-cat-swag-ok-yooo-yo.png">Forgot password?</a> */}
         </div>
 
-        <button type="submit">LOGIN</button>
+        <button type="submit">SIGN UP</button>
         </form>
       </div>
     </div>
   );
 }
 
-export default Login;
+export default Signup;

@@ -45,7 +45,8 @@
 }
 
 .login-card input[type="text"],
-.login-card input[type="password"]{
+.login-card input[type="password"],
+.login-card input[type="email"]{
 
     width:100%;
     padding:15px;
