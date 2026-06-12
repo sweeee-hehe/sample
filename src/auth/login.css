@@ -5,6 +5,8 @@
     font-family:'Poppins',sans-serif;
 }
 
+
+
 .container{
     height:100vh;
     display:flex;
@@ -16,7 +18,7 @@
         rgba(30,20,40,0.6),
         rgba(30,20,40,0.6)
     ),
-    url("https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRW4ziU8YAp2377IaT4EQYoYzPheb5UiQ8U_g&s");
+        url("https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQMkuXaEq9aqQuU6a1tP4zPU0i-Kp20Q_NTMA&s");
 
     background-size:cover;
     background-position:center;
@@ -85,6 +87,7 @@
 .options label{
     display:flex;
     gap:6px;
+    color:white;
 }
 
 .options a{
@@ -116,7 +119,10 @@
 
 .login-card button:hover{
     transform:translateY(-3px);
-
+    color:#ffffff;
     box-shadow:
     0 8px 20px rgba(255,110,199,0.4);
+}
+#sign{
+    color:white;
 }

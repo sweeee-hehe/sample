@@ -1,6 +1,7 @@
 import { useState } from "react";
 import "./signup.css";
 import authService from "../services/authService.js";
+import { Link } from "react-router";
 
 function Signup() {
   const [name, setName]=useState('');
@@ -32,7 +33,7 @@ function Signup() {
     <div className="container">
       <div className="login-card">
 
-        <h1>User Login</h1>
+        <h1>User SignUp</h1>
         <form onSubmit={handleSubmit}>
          <input
           type="email"
@@ -56,8 +57,8 @@ function Signup() {
 
           {/* <a href=" https://media.tenor.com/cRTQk6N_FxMAAAAe/swag-cat-swagbilli-cutecat-cats-cat-swag-ok-yooo-yo.png">Forgot password?</a> */}
         </div>
-
-        <button type="submit">SIGN UP</button>
+        <Link to='/Login'>
+        <button type="submit">SIGN UP</button></Link>
         </form>
       </div>
     </div>

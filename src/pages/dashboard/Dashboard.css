@@ -1,0 +1,76 @@
+.dashboard-container{
+    min-height:calc(100vh - 70px);
+    padding:30px;
+    color:white;
+}
+
+.dashboard-header{
+    text-align:center;
+    margin-bottom:25px;
+}
+
+.dashboard-header h1{
+    font-size:30px;
+    font-weight:normal;
+}
+
+.dashboard-header p{
+    font-size:15px;
+    color:#ddd;
+}
+
+.dashboard-cards{
+    display:grid;
+    grid-template-columns:repeat(auto-fit,minmax(220px,1fr));
+    gap:15px;
+    margin-bottom:25px;
+}
+
+.card{
+    background:rgba(255,255,255,0.1);
+    border:1px solid rgba(255,255,255,0.1);
+    border-radius:8px;
+    padding:20px;
+    text-align:center;
+}
+
+.card h2{
+    font-size:18px;
+    margin-bottom:10px;
+}
+
+.card p{
+    font-size:24px;
+    font-weight:bold;
+}
+
+.recent-transactions{
+    background:rgba(255,255,255,0.1);
+    border:1px solid rgba(255,255,255,0.1);
+    border-radius:8px;
+    padding:20px;
+}
+
+.recent-transactions h2{
+    font-size:20px;
+    margin-bottom:15px;
+}
+
+.transaction{
+    display:flex;
+    justify-content:space-between;
+    padding:10px;
+    border-bottom:1px solid rgba(255,255,255,0.1);
+}
+
+.transaction:last-child{
+    border-bottom:none;
+}
+
+.income-row span:last-child{
+    color:lightgreen;
+}
+
+.expense-row span:last-child{
+    color:salmon;
+}

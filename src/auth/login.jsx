@@ -1,6 +1,7 @@
 import { useState } from "react";
 import "./login.css";
 import authService from "../services/authService";
+import { Link } from "react-router";
 
 function Login() {
   const [name, setName]=useState('');
@@ -48,6 +49,8 @@ function Login() {
         </div>
 
         <button type="submit">LOGIN</button>
+        <label class='sign'>Dont have an account?</label>
+        <Link to='/Signup'>Sign Up</Link>
         </form>
       </div>
     </div>
