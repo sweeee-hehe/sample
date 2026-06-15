@@ -2,6 +2,7 @@ import { useState } from "react";
 import "./login.css";
 import authService from "../services/authService";
 import { Link } from "react-router";
+import Button from "../components/Button.jsx";
 
 function Login() {
   const [name, setName]=useState('');
@@ -48,7 +49,7 @@ function Login() {
           <a href=" https://media.tenor.com/cRTQk6N_FxMAAAAe/swag-cat-swagbilli-cutecat-cats-cat-swag-ok-yooo-yo.png">Forgot password?</a>
         </div>
 
-        <button type="submit">LOGIN</button>
+        <Button buttonText={'LOGIN'} type={'submit'} />
         <label class='sign'>Dont have an account?</label>
         <Link to='/Signup'>Sign Up</Link>
         </form>

@@ -97,7 +97,7 @@
     color:#ffffff;
 }
 
-.login-card button{
+.sign-card button{
 
     width:100%;
     padding:15px;
@@ -115,7 +115,7 @@
     transition:0.3s;
 }
 
-.login-card button:hover{
+.sign-card button:hover{
     transform:translateY(-3px);
 
     box-shadow:

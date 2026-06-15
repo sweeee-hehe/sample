@@ -2,8 +2,11 @@ import { useState } from "react";
 import "./signup.css";
 import authService from "../services/authService.js";
 import { Link } from "react-router";
+import { useNavigate } from "react-router";
+import Button from "../components/Button.jsx";
 
 function Signup() {
+  const navigate = useNavigate();
   const [name, setName]=useState('');
 
   const handleName=(event)=>{
@@ -25,10 +28,26 @@ function Signup() {
   }
   
   // console.log(pass);
-  const handleSubmit=(event)=>{
-    event.preventDefault()
-    authService.signup(mail,name,pass)
+  const handleSubmit = async (event) => {
+  event.preventDefault();
+
+  try {
+    const response = await authService.signup(
+      mail,
+      name,
+      pass
+    );
+
+    console.log(response);
+
+    if (response.success) {
+      alert("Signup Successful!");
+      navigate("/Login");
+    }
+  } catch (error) {
+    console.log(error);
   }
+};
   return (
     <div className="container">
       <div className="login-card">
@@ -57,8 +76,7 @@ function Signup() {
 
           {/* <a href=" https://media.tenor.com/cRTQk6N_FxMAAAAe/swag-cat-swagbilli-cutecat-cats-cat-swag-ok-yooo-yo.png">Forgot password?</a> */}
         </div>
-        <Link to='/Login'>
-        <button type="submit">SIGN UP</button></Link>
+        <Button buttonText={'SIGNUP'} type={'submit'} />
         </form>
       </div>
     </div>
