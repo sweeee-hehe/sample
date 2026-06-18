@@ -2,6 +2,11 @@ import "./Layout.css";
 import { Link, Outlet } from "react-router";
 
 function Layout() {
+
+  const handleLogout = () => {
+    localStorage.removeItem("currentUser");
+  };
+
   return (
     <div className="layout">
 
@@ -14,7 +19,7 @@ function Layout() {
         <div className="nav-links">
           <Link to="/home">Home</Link>
 
-          <Link to="/dashbord">
+          <Link to="/dashboard">
             Dashboard
           </Link>
 
@@ -22,7 +27,7 @@ function Layout() {
             Profile
           </Link>
 
-          <Link to="/login">
+          <Link to="/login"  onClick={handleLogout}>
             Logout
           </Link>
         </div>

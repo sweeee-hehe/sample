@@ -1,61 +1,119 @@
 import { useState } from "react";
 import "./login.css";
+import { Link, useNavigate } from "react-router";
 import authService from "../services/authService";
-import { Link } from "react-router";
 import Button from "../components/Button.jsx";
 
 function Login() {
-  const [name, setName]=useState('');
 
-  const handleName=(event)=>{
-    setName(event.target.value);
-  }
+  const navigate = useNavigate();
 
-  // console.log(name);
+  const [name, setName] = useState("");
+  const [pass, setPass] = useState("");
 
-  const [pass, setPass]=useState('');
+  const handleSubmit = async (event) => {
 
-  const handlePass=(event)=>{
-    setPass(event.target.value);
-  }
-  
-  // console.log(pass);
-  const handleSubmit=(event)=>{
-    event.preventDefault()
-    authService.login(name,pass)
-  }
+    event.preventDefault();
+
+    try {
+
+      const response =
+        await authService.login(
+          name,
+          pass
+        );
+
+      if (response.success) {
+
+        localStorage.setItem(
+          "currentUser",
+          JSON.stringify({
+            name: name
+          })
+        );
+
+        alert("Login Successful");
+
+        navigate("/dashboard");
+
+      } else {
+
+        alert(
+          response.message ||
+          "Login Failed"
+        );
+
+      }
+
+    } catch (error) {
+
+      console.log(error);
+
+      alert("Server Error");
+
+    }
+
+  };
+
   return (
+
     <div className="container">
+
       <div className="login-card">
 
         <h1>User Login</h1>
+
         <form onSubmit={handleSubmit}>
-        <input
-          type="text"
-          placeholder="User name" onChange={handleName}
-        />
 
-        <input
-          type="password"
-          placeholder="Password" onChange={handlePass}
-        />
+          <input
+            type="text"
+            placeholder="Username"
+            value={name}
+            onChange={(e) =>
+              setName(e.target.value)
+            }
+          />
 
-        <div className="options">
-          <label>
-            <input type="checkbox" />
-            Remember me
-          </label>
+          <input
+            type="password"
+            placeholder="Password"
+            value={pass}
+            onChange={(e) =>
+              setPass(e.target.value)
+            }
+          />
 
-          <a href=" https://media.tenor.com/cRTQk6N_FxMAAAAe/swag-cat-swagbilli-cutecat-cats-cat-swag-ok-yooo-yo.png">Forgot password?</a>
-        </div>
+          <div className="options">
 
-        <Button buttonText={'LOGIN'} type={'submit'} />
-        <label class='sign'>Dont have an account?</label>
-        <Link to='/Signup'>Sign Up</Link>
+            <label>
+
+              <input type="checkbox" />
+
+              Remember me
+
+            </label>
+
+          </div>
+
+          <Button
+            buttonText="LOGIN"
+            type="submit"
+          />
+
+          <div className="signup-link">
+
+            <span>
+              Don't have an account?
+            </span>
+
+            <Link to="/signup">
+              Sign Up
+            </Link>
+
+          </div>
         </form>
       </div>
     </div>
   );
 }
-
 export default Login;

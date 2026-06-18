@@ -1,86 +1,173 @@
-import { useState } from "react";
 import "./signup.css";
-import authService from "../services/authService.js";
-import { Link } from "react-router";
 import { useNavigate } from "react-router";
 import Button from "../components/Button.jsx";
+import authService from "../services/authService.js";
+
+import { Formik, Form, Field, ErrorMessage } from "formik";
+import * as Yup from "yup";
+
+const SignupSchema = Yup.object().shape({
+
+name: Yup.string()
+.min(3, "Username must be at least 3 characters")
+.required("Username is required"),
+
+mail: Yup.string()
+.email("Invalid Email")
+.required("Email is required"),
+
+pass: Yup.string()
+.min(8, "Password must be at least 8 characters")
+.matches(
+/[A-Z]/,
+"Must contain at least one uppercase letter"
+)
+.matches(
+/[a-z]/,
+"Must contain at least one lowercase letter"
+)
+.matches(
+/[0-9]/,
+"Must contain at least one number"
+)
+.matches(
+/[!@#$%^&*(),.?":{}|<>]/,
+"Must contain at least one special character"
+)
+.required("Password is required")
+
+});
 
 function Signup() {
-  const navigate = useNavigate();
-  const [name, setName]=useState('');
 
-  const handleName=(event)=>{
-    setName(event.target.value);
-  }
+const navigate = useNavigate();
 
-  // console.log(name);
+const handleSignup = (values) => {
 
-  const [pass, setPass]=useState('');
+const users =
+  JSON.parse(
+    localStorage.getItem("users")
+  ) || [];
 
-  const handlePass=(event)=>{
-    setPass(event.target.value);
-  }
-
-  const [mail, setMail]=useState('');
-
-  const handleMail=(event)=>{
-    setMail(event.target.value);
-  }
-  
-  // console.log(pass);
-  const handleSubmit = async (event) => {
-  event.preventDefault();
-
-  try {
-    const response = await authService.signup(
-      mail,
-      name,
-      pass
-    );
-
-    console.log(response);
-
-    if (response.success) {
-      alert("Signup Successful!");
-      navigate("/Login");
-    }
-  } catch (error) {
-    console.log(error);
-  }
-};
-  return (
-    <div className="container">
-      <div className="login-card">
-
-        <h1>User SignUp</h1>
-        <form onSubmit={handleSubmit}>
-         <input
-          type="email"
-          placeholder="Email" onChange={handleMail}
-        />
-        <input
-          type="text"
-          placeholder="User name" onChange={handleName}
-        />
-
-        <input
-          type="password"
-          placeholder="Password" onChange={handlePass}
-        />
-
-        <div className="options">
-          <label>
-            <input type="checkbox" />
-            Remember me
-          </label>
-
-          {/* <a href=" https://media.tenor.com/cRTQk6N_FxMAAAAe/swag-cat-swagbilli-cutecat-cats-cat-swag-ok-yooo-yo.png">Forgot password?</a> */}
-        </div>
-        <Button buttonText={'SIGNUP'} type={'submit'} />
-        </form>
-      </div>
-    </div>
+const existingUser =
+  users.find(
+    (user) =>
+      user.mail === values.mail
   );
+
+if (existingUser) {
+
+  alert(
+    "User already exists with this email"
+  );
+
+  return;
+}
+
+const newUser = {
+
+  id: Date.now(),
+
+  name: values.name,
+
+  mail: values.mail,
+
+  pass: values.pass
+
+};
+
+users.push(newUser);
+
+localStorage.setItem(
+  "users",
+  JSON.stringify(users)
+);
+
+alert("Signup Successful");
+
+navigate("/Login");
+
+
+};
+
+return (
+
+
+<div className="container">
+
+  <div className="login-card">
+
+    <h1>User Signup</h1>
+
+    <Formik
+
+      initialValues={{
+        name: "",
+        mail: "",
+        pass: ""
+      }}
+
+      validationSchema={
+        SignupSchema
+      }
+
+      onSubmit={handleSignup}
+
+    >
+
+      <Form>
+
+        <Field
+          type="email"
+          name="mail"
+          placeholder="Email"
+        />
+
+        <ErrorMessage
+          name="mail"
+          component="div"
+          className="error"
+        />
+
+        <Field
+          type="text"
+          name="name"
+          placeholder="Username"
+        />
+
+        <ErrorMessage
+          name="name"
+          component="div"
+          className="error"
+        />
+
+        <Field
+          type="password"
+          name="pass"
+          placeholder="Password"
+        />
+
+        <ErrorMessage
+          name="pass"
+          component="div"
+          className="error"
+        />
+
+        <Button
+          buttonText="SIGN UP"
+          type="submit"
+        />
+
+      </Form>
+
+    </Formik>
+
+  </div>
+
+</div>
+
+
+);
 }
 
 export default Signup;
