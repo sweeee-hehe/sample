@@ -3,20 +3,25 @@ import { useState } from "react";
 
 function Profile() {
 
+  const currentUser = JSON.parse(localStorage.getItem("currentUser")) || {};
+
   const [editing, setEditing] = useState(false);
 
   const [user, setUser] = useState({
-    name: "",
-    dob: "",
-    email: "",
-    username: ""
+    name:     currentUser.name     || "",
+    dob:      currentUser.dob      || "",
+    email:    currentUser.email    || "",
+    username: currentUser.username || currentUser.name || ""
   });
 
   const handleChange = (e) => {
-    setUser({
-      ...user,
-      [e.target.name]: e.target.value
-    });
+    setUser({ ...user, [e.target.name]: e.target.value });
+  };
+
+  const handleSave = () => {
+    // Persist updated profile back to localStorage
+    localStorage.setItem("currentUser", JSON.stringify({ ...currentUser, ...user }));
+    setEditing(false);
   };
 
   return (
@@ -25,16 +30,18 @@ function Profile() {
       <div className="profile-card">
 
         <div className="profile-top">
-          <img
-            src="https://cdn-icons-png.flaticon.com/512/3135/3135715.png"
-            alt="profile"
-            className="profile-img"
-          />
+          <div className="profile-img-wrapper">
+            <img
+              src="https://cdn-icons-png.flaticon.com/512/3135/3135715.png"
+              alt="profile"
+              className="profile-img"
+            />
+          </div>
 
           <h1>My Profile</h1>
 
           <p className="subtitle">
-            Welcome to your profile page
+            {user.email || "Manage your account details"}
           </p>
         </div>
 
@@ -42,98 +49,47 @@ function Profile() {
 
           <div className="detail-box">
             <label>Name</label>
-
-            {
-              editing
-              ? (
-                <input
-                  type="text"
-                  name="name"
-                  value={user.name}
-                  onChange={handleChange}
-                />
-              )
-              : (
-                <p>{user.name}</p>
-              )
-            }
-          </div>
-
-          <div className="detail-box">
-            <label>Date of Birth</label>
-
-            {
-              editing
-              ? (
-                <input
-                  type="date"
-                  name="dob"
-                  value={user.dob}
-                  onChange={handleChange}
-                />
-              )
-              : (
-                <p>{user.dob}</p>
-              )
-            }
-          </div>
-
-          <div className="detail-box">
-            <label>Email</label>
-
-            {
-              editing
-              ? (
-                <input
-                  type="email"
-                  name="email"
-                  value={user.email}
-                  onChange={handleChange}
-                />
-              )
-              : (
-                <p>{user.email}</p>
-              )
+            {editing
+              ? <input type="text"  name="name"     value={user.name}     onChange={handleChange} placeholder="Your name" />
+              : <p>{user.name || "—"}</p>
             }
           </div>
 
           <div className="detail-box">
             <label>Username</label>
+            {editing
+              ? <input type="text"  name="username" value={user.username} onChange={handleChange} placeholder="Username" />
+              : <p>{user.username || "—"}</p>
+            }
+          </div>
 
-            {
-              editing
-              ? (
-                <input
-                  type="text"
-                  name="username"
-                  value={user.username}
-                  onChange={handleChange}
-                />
-              )
-              : (
-                <p>{user.username}</p>
-              )
+          <div className="detail-box">
+            <label>Email</label>
+            {editing
+              ? <input type="email" name="email"    value={user.email}    onChange={handleChange} placeholder="Email address" />
+              : <p>{user.email || "—"}</p>
+            }
+          </div>
+
+          <div className="detail-box">
+            <label>Date of Birth</label>
+            {editing
+              ? <input type="date"  name="dob"      value={user.dob}      onChange={handleChange} />
+              : <p>{user.dob || "—"}</p>
             }
           </div>
 
         </div>
 
-        {
-          editing
+        {editing
           ? (
-            <button
-              className="edit-btn"
-              onClick={() => setEditing(false)}
-            >
-              Save Profile
+            <button className="edit-btn" onClick={handleSave}>
+              ✓ Save Profile
             </button>
           )
           : (
-            <button
-              className="edit-btn"
-              onClick={() => setEditing(true)}
-            >
-              Edit Profile
+            <button className="edit-btn" onClick={() => setEditing(true)}>
+              ✏️ Edit Profile
             </button>
           )
         }
