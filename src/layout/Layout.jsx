@@ -13,7 +13,7 @@ function Layout() {
       <div id="navbar">
 
         <div className="logo">
-          MERN APP
+          💜 FinTrack AI
         </div>
 
         <div className="nav-links">
@@ -27,7 +27,7 @@ function Layout() {
             Profile
           </Link>
 
-          <Link to="/login"  onClick={handleLogout}>
+          <Link to="/login" onClick={handleLogout}>
             Logout
           </Link>
         </div>
