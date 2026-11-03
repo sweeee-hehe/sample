@@ -1,69 +1,71 @@
-.layout{
-    min-height:100vh;
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap');
 
-    background:
-    linear-gradient(
-        rgba(0,0,0,0.25),
-        rgba(0,0,0,0.25)
-    ),
-    url("https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQMkuXaEq9aqQuU6a1tP4zPU0i-Kp20Q_NTMA&s");
-
-    background-size:cover;
-    background-position:center;
-    background-attachment:fixed;
+/* ─── Layout Shell ───────────────────────────────── */
+.layout {
+  min-height: 100vh;
+  background: #080d1a;
+  font-family: 'Inter', sans-serif;
 }
 
-#navbar{
-    height:70px;
-
-    display:flex;
-    justify-content:space-between;
-    align-items:center;
-
-    padding:0 40px;
-
-    backdrop-filter:blur(15px);
-    -webkit-backdrop-filter:blur(15px);
-
-    background:rgba(255,255,255,0.08);
-
-    border-bottom:1px solid rgba(255,255,255,0.15);
+/* ─── Navbar ─────────────────────────────────────── */
+#navbar {
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  height: 68px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0 2.5rem;
+  background: rgba(8, 13, 26, 0.85);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border-bottom: 1px solid rgba(99, 102, 241, 0.18);
 }
 
-.logo{
-    color:white;
-
-    font-size:24px;
-    font-weight:bold;
-
-    letter-spacing:2px;
+.logo {
+  font-size: 1.25rem;
+  font-weight: 800;
+  letter-spacing: -0.02em;
+  background: linear-gradient(135deg, #818cf8, #c084fc);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
 }
 
-.nav-links{
-    display:flex;
-    gap:25px;
+.nav-links {
+  display: flex;
+  align-items: center;
+  gap: 4px;
 }
 
-.nav-links a{
-    text-decoration:none;
-
-    color:white;
-
-    font-size:16px;
-
-    padding:8px 15px;
-
-    border-radius:8px;
-
-    transition:0.3s;
+.nav-links a {
+  text-decoration: none;
+  color: #94a3b8;
+  font-size: 0.92rem;
+  font-weight: 500;
+  padding: 8px 16px;
+  border-radius: 10px;
+  transition: background 0.2s, color 0.2s, transform 0.15s;
 }
 
-.nav-links a:hover{
-    background:rgba(255,255,255,0.15);
-
-    transform:translateY(-2px);
+.nav-links a:hover {
+  background: rgba(99, 102, 241, 0.12);
+  color: #e2e8f0;
+  transform: translateY(-1px);
 }
 
-.content{
-    min-height:calc(100vh - 70px);
+/* Logout link — styled as a danger pill */
+.nav-links a:last-child {
+  color: #f87171;
+  border: 1px solid rgba(248, 113, 113, 0.25);
+}
+.nav-links a:last-child:hover {
+  background: rgba(248, 113, 113, 0.1);
+  color: #fca5a5;
+}
+
+/* ─── Content Area ───────────────────────────────── */
+.content {
+  min-height: calc(100vh - 68px);
 }
